@@ -12,8 +12,9 @@ class Kernel {
     
     public function __construct(){
         self::init();
-        echo "Kernel->";
+        self::autoload();
         $this->loader = new Loader();
+        self::dispatch();
     }
     
     // Initialization of the application
@@ -43,7 +44,10 @@ class Kernel {
         require CORE_PATH . "Model.php";
 
         // Load configuration file
-        //$GLOBALS['config'] = include CONFIG_PATH . "config.php";
+        $GLOBALS['config'] = include CONFIG_PATH . "config.php";
+        
+        // Load routing file
+        require CONFIG_PATH . "routes.php";
         
         // Start session
         session_start();
@@ -51,7 +55,8 @@ class Kernel {
     
     //Autoloading
     private static function autoload(){
-        spl_autoload_register(array(__class__,'load'));
+        echo "Kernel->";
+        // spl_autoload_register(array(__class__,'load'));
     }
     
     //Defining a load method
@@ -73,9 +78,22 @@ class Kernel {
     private static function dispatch(){
 
         // Instantiate the controller class and call its action method
-        $controller_name = CONTROLLER . "Controller";
-        $action_name = ACTION . "Action";
-        $controller = new $controller_name;
-        $controller->$action_name();
+        $tokens = explode('/',rtrim($_SERVER['PATH_INFO']));
+        $controllerName = ucfirst($tokens[1]);
+        require_once CONTROLLER_PATH.$controllerName.'.php';
+        var_dump($tokens);
+        if(isset($tokens[2])){
+            if($tokens[2] != null){
+                $action_name = $tokens[2];
+                $controller = new $controllerName;
+                $controller->$action_name();
+            }
+            else
+                $controller = new $controllerName;
+        }
+        else {
+            $controller = new $controllerName;
+        }
+        
     }
 }

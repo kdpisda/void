@@ -10,10 +10,6 @@ class Loader{
 
     public function __construct(){
         echo "Loader->";
-        $tokens = explode('/',rtrim($_SERVER['PATH_INFO']));
-        $controllerName = ucfirst($tokens[1]);
-        require_once CONTROLLER_PATH.$controllerName.'.php';
-        $controller = new $controllerName;
     }
     
     public function render($script){
