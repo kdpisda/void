@@ -13,8 +13,8 @@ class Kernel {
     public function __construct(){
         self::init();
         self::autoload();
-        $this->loader = new Loader();
-        self::dispatch();
+        
+        $this->load = new Loader();
     }
     
     // Initialization of the application
@@ -40,6 +40,8 @@ class Kernel {
         // Load core classes
         require CORE_PATH . "Void.php";
         require CORE_PATH . "Loader.php";
+        require CORE_PATH . "Router.php";
+        require CORE_PATH . "URI.php";
         require DB_PATH . "DB.php";
         require CORE_PATH . "Model.php";
 
@@ -47,7 +49,7 @@ class Kernel {
         $GLOBALS['config'] = include CONFIG_PATH . "config.php";
         
         // Load routing file
-        require CONFIG_PATH . "routes.php";
+        $GLOBALS['config'] = include CONFIG_PATH . "routes.php";
         
         // Start session
         session_start();
@@ -55,8 +57,11 @@ class Kernel {
     
     //Autoloading
     private static function autoload(){
-        echo "Kernel->";
         // spl_autoload_register(array(__class__,'load'));
+        
+        $url = new Void_URI();
+        $this->route = new Router($url->controllerName, $url->methodName, $url->parameters);
+        
     }
     
     //Defining a load method
@@ -77,23 +82,7 @@ class Kernel {
     // Routing and dispatching
     private static function dispatch(){
 
-        // Instantiate the controller class and call its action method
-        $tokens = explode('/',rtrim($_SERVER['PATH_INFO']));
-        $controllerName = ucfirst($tokens[1]);
-        require_once CONTROLLER_PATH.$controllerName.'.php';
-        var_dump($tokens);
-        if(isset($tokens[2])){
-            if($tokens[2] != null){
-                $action_name = $tokens[2];
-                $controller = new $controllerName;
-                $controller->$action_name();
-            }
-            else
-                $controller = new $controllerName;
-        }
-        else {
-            $controller = new $controllerName;
-        }
+        
         
     }
 }

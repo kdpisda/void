@@ -12,18 +12,26 @@ class Loader{
         echo "Loader->";
     }
     
-    public function render($script){
+    public function load($script){
 
         // include LIB_PATH . "$lib.php";
         require($script);
     }
 
 
-    // loader helper functions. Naming conversion is xxx_helper.php;
+    // loader helper functions. Naming conventions helperName.php
 
     public function helper($helper){
 
-        include HELPER_PATH . "{$helper}_helper.php";
+        include HELPER_PATH . "$helper.php";
+
+    }
+    
+    // loader view functions. Naming conventions viewName.php
+    
+    public function view($helper){
+
+        include VIEW_PATH . "$helper.php";
 
     }
 

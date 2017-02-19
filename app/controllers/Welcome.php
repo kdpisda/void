@@ -5,7 +5,8 @@
 
 class Welcome extends void{
     public function __construct(){
-        echo "Hello World";
+        echo "Hello World from Welcome Controller";
+        // $this->load;
     }
     
     public function index(){

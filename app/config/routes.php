@@ -1,4 +1,5 @@
 <?php 
+// defined('BASEPATH') OR exit('No direct script access allowed');
 
 /* Void 0.1
 *  Author :: Kuldeep Pisda
