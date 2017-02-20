@@ -9,7 +9,7 @@ class Loader{
     // Load library classes
 
     public function __construct(){
-        echo "Loader->";
+        
     }
     
     public function load($script){
@@ -29,9 +29,9 @@ class Loader{
     
     // loader view functions. Naming conventions viewName.php
     
-    public function view($helper){
+    public function view($view){
 
-        include VIEW_PATH . "$helper.php";
+        include VIEW_PATH . $view;
 
     }
 

@@ -9,12 +9,11 @@
 
 class Kernel {
 
-    
     public function __construct(){
         self::init();
-        self::autoload();
-        
-        $this->load = new Loader();
+        //self::autoload();
+        //self::dispatch();
+        $this->uri = new Void_URI();
     }
     
     // Initialization of the application
@@ -59,9 +58,6 @@ class Kernel {
     private static function autoload(){
         // spl_autoload_register(array(__class__,'load'));
         
-        $url = new Void_URI();
-        $this->route = new Router($url->controllerName, $url->methodName, $url->parameters);
-        
     }
     
     //Defining a load method
@@ -81,8 +77,6 @@ class Kernel {
     
     // Routing and dispatching
     private static function dispatch(){
-
-        
         
     }
 }

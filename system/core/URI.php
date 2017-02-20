@@ -16,20 +16,18 @@ class Void_URI {
     public $parameters;
     
     public function __construct(){
-        
         $this->get_uri();
-        var_dump($this->tokens);
-        
+        $this->route = new Router($this->controllerName, $this->methodName, $this->parameters);
     }
     
     public function get_uri(){
         
         // Instantiate the controller class and call its action method
-        if(isset($_SERVER['PATH_INFO'])){
+        if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] != null){
             
             $this->tokens = explode('/',rtrim($_SERVER['PATH_INFO']));
         
-            if($this->tokens != null){
+            if($this->tokens[1] != null){
             
                 // Initilising the controller name
                 $this->controllerName = ucfirst($this->tokens[1]);
@@ -51,7 +49,10 @@ class Void_URI {
                 }
             }
             // Making Welcome controller default
-            else $this->controllerName = 'Welcome';
+            else {
+                $this->controllerName = 'Welcome';
+                $this->methodName = 'index';
+            }
         }
     }
 }

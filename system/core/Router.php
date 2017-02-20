@@ -7,9 +7,10 @@ class Router{
     private $method;
     private $parameters;
     
-    public function __constructor($controller = null, $method = null, $parameters = null){
+    public function __construct($controller = null, $method = null, $parameters = null){
+        $this->load = new Loader;
         
-        if($controller != null){
+        if(isset($controller) && $controller != null){
             require CONTROLLER_PATH.$controller.'.php';
             $this->_Load_Controller($controller);
             if($method != null){
@@ -18,7 +19,11 @@ class Router{
                     $this->_Init_Param($parameters);
                 }
             }
+            else {
+                $this->_Init_Method('index');
+            }
         }
+        else $this->load->view('error/error.phtml');
     }
     
     // Load controller
@@ -27,10 +32,10 @@ class Router{
     }
     
     public function _Init_Method ($method){
-        $this->controller.$method();
+        $this->controller->$method();
     }
     
     public function _Init_Param ($parameters){
-        $this->controller.$method($parameters);
+        $this->controller->$method($parameters);
     }
 }
