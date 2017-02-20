@@ -1,15 +1,14 @@
 <?php
 
 // Router Class which will route the application
-class Router{
+class Router {
     
     private $controller;
     private $method;
     private $parameters;
     
     public function __construct($controller = null, $method = null, $parameters = null){
-        $this->load = new Loader;
-        
+        $this->load = new loader;
         if(isset($controller) && $controller != null){
             require CONTROLLER_PATH.$controller.'.php';
             $this->_Load_Controller($controller);
@@ -23,7 +22,7 @@ class Router{
                 $this->_Init_Method('index');
             }
         }
-        else $this->load->view('error/error.phtml');
+        else $this->load->view('error/error');
     }
     
     // Load controller

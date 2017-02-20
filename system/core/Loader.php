@@ -31,7 +31,7 @@ class Loader{
     
     public function view($view){
 
-        include VIEW_PATH . $view;
+        include VIEW_PATH . $view.'.php';
 
     }
 

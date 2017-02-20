@@ -13,6 +13,7 @@ class Kernel {
         self::init();
         //self::autoload();
         //self::dispatch();
+        $this->load = new Loader;
         $this->uri = new Void_URI();
     }
     
@@ -37,7 +38,7 @@ class Kernel {
         define("UPLOAD_PATH", PUBLIC_PATH . "uploads" . DS);
         
         // Load core classes
-        require CORE_PATH . "Void.php";
+        // require CORE_PATH . "Void.php";
         require CORE_PATH . "Loader.php";
         require CORE_PATH . "Router.php";
         require CORE_PATH . "URI.php";
