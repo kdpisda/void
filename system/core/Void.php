@@ -2,9 +2,10 @@
 
 class Void {
     
-    protected $load = null;
+    protected $load;
     
     public function _construct(){
-        $this->load = new Loader;
+        $this->load = new Loader();
     }
+    
 }

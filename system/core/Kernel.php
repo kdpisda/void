@@ -6,14 +6,14 @@
 
 // system/core/Kernel.php
 
-
 class Kernel {
+    
+    protected $load = null;
 
     public function __construct(){
         self::init();
         self::autoload();
         self::dispatch();
-        $this->load = new Loader;
         //$this->uri = new Void_URI();
     }
     
@@ -71,6 +71,6 @@ class Kernel {
 
     // Instantiate the controller class and call its action method
 
-        new Void_URI;
+        $this->route = new Void_URI;
     }
 }

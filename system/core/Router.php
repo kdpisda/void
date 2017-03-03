@@ -1,7 +1,7 @@
 <?php
 
 // Router Class which will route the application
-class Router{
+class Router {
     
     public function __construct($controller = null, $method = null, $parameters = null){
         $this->load = new loader;

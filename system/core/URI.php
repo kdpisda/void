@@ -2,7 +2,7 @@
 
 // This class control the uri segments of the app
 
-class Void_URI {
+class Void_URI{
     
     private $tokens = array();
     
@@ -18,6 +18,7 @@ class Void_URI {
     public function __construct(){
         $this->get_uri();
         $this->route = new Router($this->controllerName, $this->methodName, $this->parameters);
+        $this->rute = null;
     }
     
     public function get_uri(){
