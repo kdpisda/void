@@ -27,32 +27,30 @@ class Void_URI {
             
             $this->tokens = explode('/',rtrim($_SERVER['PATH_INFO']));
         
-            if($this->tokens[1] != null){
+            if(isset($this->tokens[1]) && $this->tokens[1] != null){
             
                 // Initilising the controller name
                 $this->controllerName = ucfirst($this->tokens[1]);
                 
-                if(isset($this->tokens[2])){
-                    
-                    if($this->tokens[2] != null)
+                if(isset($this->tokens[2]) && $this->tokens[2] != null){
                         
-                        // Initilising method name
-                        $this->methodName = $this->tokens[2];
-                    
-                }
-                if(isset($this->tokens[3])){
-                    
-                    if($this->tokens[3] != null)
+                    // Initilising method name
+                    $this->methodName = $this->tokens[2];
+                    if(isset($this->tokens[3]) && $this->tokens[3] != null){
                         
                         // Setting the parameter
                         $this->parameters = $this->tokens[3];
+                    }
+                    
                 }
             }
-            // Making Welcome controller default
-            else {
-                $this->controllerName = 'Welcome';
-                $this->methodName = 'index';
-            }
+        }
+        
+        // Making Welcome controller default
+        else {
+            // Load routing file
+            require_once CONFIG_PATH . "routes.php";
+            $this->controllerName = $route['default'];
         }
     }
 }

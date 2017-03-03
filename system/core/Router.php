@@ -1,20 +1,20 @@
 <?php
 
 // Router Class which will route the application
-class Router {
-    
-    private $controller;
-    private $method;
-    private $parameters;
+class Router{
     
     public function __construct($controller = null, $method = null, $parameters = null){
         $this->load = new loader;
         if(isset($controller) && $controller != null){
-            require CONTROLLER_PATH.$controller.'.php';
+            
+            $this->load->controller($controller);
             $this->_Load_Controller($controller);
-            if($method != null){
+            
+            if(isset($method) && $method != null){
+                
                 $this->_Init_Method($method);
-                if($parameters != null){
+                
+                if(isset($parameters) && $parameters != null){
                     $this->_Init_Param($parameters);
                 }
             }

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('APP_PATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,10 +74,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p>The page you are looking at is being generated dynamically by Void.</p>
 
 		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+		<code>app/views/welcome_message.php</code>
 
 		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
+		<code>app/controllers/Welcome.php</code>
 
 		<p>If you are exploring Void for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>

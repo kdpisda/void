@@ -11,10 +11,10 @@ class Kernel {
 
     public function __construct(){
         self::init();
-        //self::autoload();
-        //self::dispatch();
+        self::autoload();
+        self::dispatch();
         $this->load = new Loader;
-        $this->uri = new Void_URI();
+        //$this->uri = new Void_URI();
     }
     
     // Initialization of the application
@@ -36,20 +36,9 @@ class Kernel {
         define("LIB_PATH", FRAMEWORK_PATH . "libraries" . DS);
         define("HELPER_PATH", FRAMEWORK_PATH . "helpers" . DS);
         define("UPLOAD_PATH", PUBLIC_PATH . "uploads" . DS);
-        
-        // Load core classes
-        // require CORE_PATH . "Void.php";
-        require CORE_PATH . "Loader.php";
-        require CORE_PATH . "Router.php";
-        require CORE_PATH . "URI.php";
-        require DB_PATH . "DB.php";
-        require CORE_PATH . "Model.php";
 
         // Load configuration file
-        $GLOBALS['config'] = include CONFIG_PATH . "config.php";
-        
-        // Load routing file
-        $GLOBALS['config'] = include CONFIG_PATH . "routes.php";
+        $GLOBALS['config'] = require_once CONFIG_PATH . "config.php";
         
         // Start session
         session_start();
@@ -57,27 +46,31 @@ class Kernel {
     
     //Autoloading
     private static function autoload(){
-        // spl_autoload_register(array(__class__,'load'));
-        
+        //spl_autoload_register(array(__class__,'load'));
+        include CORE_PATH ."Loader.php";
+        include CORE_PATH ."URI.php";
+        include CORE_PATH ."Model.php";
+        include CORE_PATH ."Router.php";
+        include CORE_PATH ."Void.php";
     }
     
     //Defining a load method
-    private static function load($class){
+    /*private static function load($class){
         
         //Autoloading controller and model class
-        if(!file_exists(CURR_CONTROLLER_PATH."$class.php")){
+        if(!file_exists(CORE_PATH."$class.php")){
             // Trying to get controller
-            require_once CURR_CONTROLLER_PATH."$class.php";
-            
-        }else if(!file_exists(CURR_CONTROLLER_PATH."$class.php")){
-            // Controller not found, loading model
-            require_once  MODEL_PATH."$class.php";
+            require_once CORE_PATH."$class.php";
         }
 
-    }
+    } */
     
     // Routing and dispatching
+
     private static function dispatch(){
-        
+
+    // Instantiate the controller class and call its action method
+
+        new Void_URI;
     }
 }

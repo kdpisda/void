@@ -1,18 +1,10 @@
 <?php
-    /*
-    Void 0.1
-    Author:: Kuldeep Pisda
-    */
 
-// Base Controller
-
-require_once('Kernel.php');
-class Void extends Kernel {
+class Void {
     
-    protected $load;
-    public function __construct(){
-        $this->kernel = new Kernel;
-        $this->load = new loader;
+    protected $load = null;
+    
+    public function _construct(){
+        $this->load = new Loader;
     }
-
 }

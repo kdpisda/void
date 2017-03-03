@@ -2,9 +2,9 @@
 
 
 
-require_once 'system/core/Void.php';
+require_once 'system/core/Kernel.php';
 
-new Void;
+new Kernel;
 
 /*
  

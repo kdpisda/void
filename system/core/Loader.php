@@ -6,16 +6,16 @@
 
 class Loader{
 
-    // Load library classes
-
-    public function __construct(){
-        
+    public function _construct(){
+        require_once CONFIG_PATH . "routes.php";
     }
     
-    public function load($script){
+    // Load library classes
+    
+    public function auto_load($lib){
 
         // include LIB_PATH . "$lib.php";
-        require($script);
+        require_once("$lib.php");
     }
 
 
@@ -31,8 +31,13 @@ class Loader{
     
     public function view($view){
 
-        include VIEW_PATH . $view.'.php';
+        include VIEW_PATH . "$view.php";
 
+    }
+    
+    // loader controller functions. Naming conventions controllerName.php
+    public function controller($controller){
+        include CONTROLLER_PATH . "$controller.php";
     }
 
 }
